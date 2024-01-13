@@ -2,9 +2,9 @@
   "name": "danielarefojoApp",
   "version": "1.0.0",
   "scripts": {
-    "android": "expo start --android",
+    "android": "expo run:android",
     "format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
-    "ios": "expo start --ios",
+    "ios": "expo run:ios",
     "start": "expo start",
     "web": "expo start --web"
   },
@@ -37,7 +37,8 @@
     "react-native-url-polyfill": "^2.0.0",
     "react-native-web": "~0.19.6",
     "reanimated": "^0.0.1-alpha",
-    "tamagui": "1.74.8"
+    "tamagui": "1.74.8",
+    "expo-splash-screen": "~0.20.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
