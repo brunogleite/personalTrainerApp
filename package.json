@@ -33,7 +33,9 @@
     "react-native-screens": "~3.22.0",
     "react-native-url-polyfill": "^2.0.0",
     "react-native-web": "~0.19.6",
-    "tamagui": "1.74.8"
+    "reanimated": "^0.0.1-alpha",
+    "tamagui": "1.74.8",
+    "react-native-reanimated": "~3.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
