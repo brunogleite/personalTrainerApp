@@ -7,7 +7,7 @@ import { useState } from 'react';
 import MovieCard from '@/components/MovieCard';
 import useDebounce from '@/utils/useDebounce';
 
-const Page = () => {
+const HomePagew = () => {
   const [searchString, setSearchString] = useState('');
   const debouncedString = useDebounce(searchString, 300);
 
@@ -88,4 +88,4 @@ const Page = () => {
     </Main>
   );
 };
-export default Page;
+export default HomePagew;

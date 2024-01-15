@@ -10,6 +10,7 @@ type MovieCardProps = {
 const MovieCard = ({ movie }: MovieCardProps) => (
   <Link
     href={`/(drawer)/home/${movie.media_type === 'movie' ? 'movie' : 'tv'}/${movie.id}`}
+    onPress={(e) => console.log(e)}
     asChild>
     <Card
       elevate

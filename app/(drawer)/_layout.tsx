@@ -1,37 +1,19 @@
-import { Ionicons } from '@expo/vector-icons';
-import { colorTokens } from '@tamagui/themes';
-import Drawer from 'expo-router/drawer';
+import { Tabs } from 'expo-router';
+import FavoritePage from './favorites';
+import HomePage from './home';
+
 
 const Layout = () => {
   return (
-    <Drawer
-      screenOptions={{
-        headerShown: true,
-        drawerHideStatusBarOnOpen: true,
-        drawerActiveBackgroundColor: colorTokens.dark.blue.blue7,
-        drawerActiveTintColor: '#fff',
-        drawerLabelStyle: { marginLeft: -20 },
-      }}>
-      <Drawer.Screen
+    <Tabs>
+      <Tabs.Screen
         name="home"
-        options={{
-          title: 'Moviestar',
-          headerShown: false,
-          drawerIcon: ({ color, size }) => <Ionicons name="ios-home" size={size} color={color} />,
-        }}
       />
 
-      <Drawer.Screen
+      <Tabs.Screen
         name="favorites"
-        options={{
-          title: 'My Favorites',
-          headerShown: false,
-          drawerIcon: ({ color, size }) => (
-            <Ionicons name="star-outline" size={size} color={color} />
-          ),
-        }}
       />
-    </Drawer>
+    </Tabs>
   );
 };
 
