@@ -31,3 +31,11 @@ export const getMovieDetails = async (id: number, type: MediaType): Promise<any>
   const data = await response.json();
   return data;
 };
+
+export const getUserWorkoutForDay = async (id: number, type: MediaType): Promise<any> => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/${type}/${id}/credits?language=en-US&api_key=${API_KEY}`
+  );
+  const data = await response.json();
+  return data;
+};
