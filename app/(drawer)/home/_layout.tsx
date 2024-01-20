@@ -13,7 +13,7 @@ const Layout = () => {
     <Stack
       screenOptions={{
         headerStyle: {
-          backgroundColor: theme.blue7.get(),
+          backgroundColor: theme.gray2.get(),
         },
         headerTintColor: '#fff',
       }}>

@@ -6,6 +6,7 @@ import { getSearchResults, getTrending } from '@/services/api';
 import { useState } from 'react';
 import MovieCard from '@/components/MovieCard';
 import useDebounce from '@/utils/useDebounce';
+import CalendarHorizontal from '@/components/CalendarHorizontal';
 
 const HomePagew = () => {
   const [searchString, setSearchString] = useState('');
@@ -23,7 +24,7 @@ const HomePagew = () => {
   });
 
   return (
-    <Main>
+    <Main backgroundColor='$gray2Dark'>
       <ImageBackground
         source={{
           uri: 'https://image.tmdb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,032541,01b4e4)/ghQrKrcEpAlkzBuNoOCSxHQXWqw.jpg',
@@ -66,6 +67,7 @@ const HomePagew = () => {
         <Spinner py={14} size="large" color={'$blue10'} />
       )}
 
+      <CalendarHorizontal />
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}

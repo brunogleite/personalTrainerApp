@@ -20,23 +20,20 @@ const AuthProvider = (props: Props) => {
 	const [session, setSession] = useState<Session | null>(null);
 
 	useEffect(() => {
+
 		const session = supabase.auth.getSession();
         session.then((res) => {
 		setSession(res?.data?.session);
 		setUser(res?.data?.session ? true : false);
 		const { data: authListener } = supabase.auth.onAuthStateChange(
-			async (event, session) => {
-				console.log(`Supabase auth event: ${event}`);
-                if(!user) {
-                    setUser(false);
-                }
-				setSession(session);
-				setUser(session ? true : false);
+			 (event, session) => {
+				if(event === 'SIGNED_IN') {
+					setSession(session);
+					setUser(session ? true : false);
+				}
 			}
 		);
-		return () => {
-			authListener!.subscription.unsubscribe();
-		};
+			authListener.subscription.unsubscribe();
     });
 	}, [user]);
  
