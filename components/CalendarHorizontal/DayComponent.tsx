@@ -2,16 +2,29 @@ import { StyleSheet } from 'react-native'
 import React from 'react'
 import { Text, View } from 'tamagui'
 import StateCircle from './StatesComponent'
+import { format } from 'date-fns'
 
 const DayComponent = (props: any) => {
-    const { formattedDate } = props
+    const { Date, selectedDay, setSelectedDay, currentDate } = props
     
-  return (
-    <View borderColor='$color.yellow1Light' borderWidth='$1' borderRadius="$14" paddingHorizontal='$2' paddingVertical='$6'>
-        <Text color='$color.yellow1Light'>{formattedDate}</Text>
-        <StateCircle />
-    </View>
-  )
+    const formattedDates = format(Date, 'ccc, d');
+
+    return (
+        <View 
+            borderColor={Date?.getDay() == currentDate?.getDay() ? '$color.yellow5Light' :  '$color.red5Light'} 
+            borderWidth='$1' 
+            borderRadius="$14" 
+            paddingHorizontal='$2' 
+            paddingVertical='$6'>
+            <Text 
+                color='$color.yellow1Light'>
+                    {formattedDates}
+            </Text>
+            <StateCircle
+            Date={Date} 
+            currentDate={currentDate} />
+        </View>
+    )
 }
 
 export default DayComponent

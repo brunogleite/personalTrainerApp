@@ -2,26 +2,33 @@ import { ImageBackground } from 'react-native';
 import { Input, ScrollView, Spinner, YStack } from 'tamagui';
 import { Container, Title, Main, Subtitle } from '@/tamagui.config';
 import { useQuery } from '@tanstack/react-query';
-import { getSearchResults, getTrending } from '@/services/api';
-import { useState } from 'react';
+import { getSearchResults, getTrending, getWorkoutByDate } from '@/services/api';
+import { useEffect, useState } from 'react';
 import MovieCard from '@/components/MovieCard';
 import useDebounce from '@/utils/useDebounce';
 import CalendarHorizontal from '@/components/CalendarHorizontal';
+import useWorkoutByWorkoutDate from '@/hooks/useWorkoutByWorkoutDate';
+import { supabase } from '@/utils/supabase';
 
-const HomePagew = () => {
-  const [searchString, setSearchString] = useState('');
-  const debouncedString = useDebounce(searchString, 300);
+const HomePage = () => {
 
-  const trendingQuery = useQuery({
-    queryKey: ['trending'],
-    queryFn: getTrending,
-  });
+  const { 
+    data, 
+    isLoading, 
+    isError 
+  } = useWorkoutByWorkoutDate();
 
-  const searchQuery = useQuery({
+  useEffect((() => {
+    console.log(typeof(data[0].date))
+  }), [])
+
+  /*const searchQuery = useQuery({
     queryKey: ['search', debouncedString],
     queryFn: () => getSearchResults(debouncedString),
     enabled: debouncedString.length > 0,
-  });
+  });*/
+
+
 
   return (
     <Main backgroundColor='$gray2Dark'>
@@ -42,28 +49,11 @@ const HomePagew = () => {
               animation="quick">
               Trending
             </Title>
-            <Input
-              placeholder="Search for a movie, tv show, person...."
-              placeholderTextColor={'#fff'}
-              borderWidth={1}
-              size={'$4'}
-              value={searchString}
-              onChangeText={(text) => setSearchString(text)}
-            />
           </YStack>
         </Container>
       </ImageBackground>
 
-      <Subtitle
-        p={10}
-        enterStyle={{
-          opacity: 0,
-        }}
-        animation="lazy">
-        {searchQuery.data?.results ? 'Search Results' : 'Trending'}
-      </Subtitle>
-
-      {(trendingQuery.isLoading || searchQuery.isLoading) && (
+      {isLoading && (
         <Spinner py={14} size="large" color={'$blue10'} />
       )}
 
@@ -73,21 +63,9 @@ const HomePagew = () => {
         showsHorizontalScrollIndicator={false}
         py={40}
         contentContainerStyle={{ gap: 14, paddingLeft: 14 }}>
-        {searchQuery.data?.results ? (
-          <>{searchQuery.data?.results.map((item) => <MovieCard key={item.id} movie={item} />)}</>
-        ) : (
-          <>
-            {trendingQuery.data?.results && (
-              <>
-                {trendingQuery.data?.results.map((item) => (
-                  <MovieCard key={item.id} movie={item} />
-                ))}
-              </>
-            )}
-          </>
-        )}
+        
       </ScrollView>
     </Main>
   );
 };
-export default HomePagew;
+export default HomePage;

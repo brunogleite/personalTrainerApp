@@ -8,6 +8,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { queryClient } from '@/queryClient';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from '@/provider/authProvider';
+import { DaysProvider } from '@/provider/daysProvider';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -28,13 +29,15 @@ export default function Layout() {
   return (
     <TamaguiProvider config={config}>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <AuthProvider>
-          <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <DaysProvider>
             <Theme name={'blue'}>
               <Slot />
             </Theme>
-          </QueryClientProvider>
+        </DaysProvider>
         </AuthProvider>
+          </QueryClientProvider>
       </GestureHandlerRootView>
     </TamaguiProvider>
   );

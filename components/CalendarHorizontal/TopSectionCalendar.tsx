@@ -1,21 +1,17 @@
-import { StyleSheet, View } from 'react-native'
 import React from 'react'
-import { XStack, Text } from 'tamagui'
+import { XStack, Text, Button, View } from 'tamagui'
 
 const TopSectionCalendar = (props : any) => {
-    const { currentDate } = props
+    const { currentDate, toggleVisibility} = props
 
-    console.log(currentDate)
   return (
-    <View>
-        <XStack>
+    <View padding='$-10'>
+        <XStack alignItems='center' justifyContent='space-between'>
             <Text color='$color.yellow1Light'>{currentDate}</Text>
-            <Text color='$color.yellow1Light'></Text>
+            <Button onPress={() => toggleVisibility()} color='$color.yellow1Light'>MAIS</Button>
         </XStack>   
     </View>
   )
 }
 
 export default TopSectionCalendar
-
-const styles = StyleSheet.create({})

@@ -1,4 +1,5 @@
 import { MediaType, TrendingResult } from '@/interfaces/apiresults';
+import { supabase } from '@/utils/supabase';
 
 const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
 
@@ -10,6 +11,14 @@ export const getTrending = async (): Promise<TrendingResult> => {
 
   return json;
 };
+
+export const getWorkoutByDate = async (client: any) => {
+  let { data: workouts, error } = await client
+  .from('workouts')
+  .select("*")
+
+  return workouts
+}
 
 export const getSearchResults = async (query: string): Promise<TrendingResult> => {
   console.log('SEARCH: ', query);
