@@ -12,10 +12,22 @@ export const getTrending = async (): Promise<TrendingResult> => {
   return json;
 };
 
-export const getWorkoutByDate = async (client: any) => {
+export const getWorkoutByDate = async (client: any, formattedCurrentDate: string) => {
   let { data: workouts, error } = await client
   .from('workouts')
-  .select("*")
+  .select(
+    `*,
+    warmups (
+      *
+    ),
+    actual_trainings (
+      *
+    ),
+    stretches (
+      *
+    )
+ `)
+  .eq('date', formattedCurrentDate)
 
   return workouts
 }

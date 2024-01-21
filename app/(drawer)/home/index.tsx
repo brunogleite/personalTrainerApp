@@ -9,17 +9,22 @@ import useDebounce from '@/utils/useDebounce';
 import CalendarHorizontal from '@/components/CalendarHorizontal';
 import useWorkoutByWorkoutDate from '@/hooks/useWorkoutByWorkoutDate';
 import { supabase } from '@/utils/supabase';
+import { useDays } from '@/provider/daysProvider';
+import { format } from 'date-fns';
 
 const HomePage = () => {
+  const { currentDate } = useDays();
+
+  const formattedCurrentDate = format(currentDate, 'yyyy, MM dd');
 
   const { 
     data, 
     isLoading, 
     isError 
-  } = useWorkoutByWorkoutDate();
+  } = useWorkoutByWorkoutDate(formattedCurrentDate);
 
   useEffect((() => {
-    console.log(typeof(data[0].date))
+    console.log(data);
   }), [])
 
   /*const searchQuery = useQuery({
