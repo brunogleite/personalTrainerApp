@@ -1,16 +1,14 @@
 import { ImageBackground } from 'react-native';
 import { Input, ScrollView, Spinner, YStack } from 'tamagui';
 import { Container, Title, Main, Subtitle } from '@/tamagui.config';
-import { useQuery } from '@tanstack/react-query';
 import { getSearchResults, getTrending, getWorkoutByDate } from '@/services/api';
 import { useEffect, useState } from 'react';
-import MovieCard from '@/components/MovieCard';
-import useDebounce from '@/utils/useDebounce';
 import CalendarHorizontal from '@/components/CalendarHorizontal';
 import useWorkoutByWorkoutDate from '@/hooks/useWorkoutByWorkoutDate';
 import { supabase } from '@/utils/supabase';
 import { useDays } from '@/provider/daysProvider';
 import { format } from 'date-fns';
+import WorkoutCard from '@/components/WorkoutList';
 
 const HomePage = () => {
   const { currentDate } = useDays();
@@ -64,11 +62,13 @@ const HomePage = () => {
 
       <CalendarHorizontal />
       <ScrollView
-        horizontal
         showsHorizontalScrollIndicator={false}
         py={40}
         contentContainerStyle={{ gap: 14, paddingLeft: 14 }}>
-        
+          <WorkoutCard />
+          <WorkoutCard />
+          <WorkoutCard />
+          <WorkoutCard />
       </ScrollView>
     </Main>
   );
