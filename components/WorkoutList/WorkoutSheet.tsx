@@ -1,6 +1,6 @@
+import { Link, LinkProps } from 'expo-router'
 import React from 'react'
-import { Button, H2, Input, Paragraph, Sheet, SheetProps, YStack } from 'tamagui'
-
+import { Button, H2, View, Paragraph, Sheet, SheetProps, YStack, Text } from 'tamagui'
 
 const WorkoutSheet = (props : any) => {
     const { open, setOpen, position, setPosition, modal, setModal, innerOpen, setInnerOpen, snapPointsMode, setSnapPointsMode } = props
@@ -25,19 +25,16 @@ const WorkoutSheet = (props : any) => {
       exitStyle={{ opacity: 0 }}
     />
     <Sheet.Handle />
-    <Sheet.Frame padding="$4" justifyContent="center" alignItems="center" space="$5">
-      <Button size="$6" circular onPress={() => setOpen(false)} />
-      <Input width={200} />
-      {modal && (
-        <>
-          <InnerSheet open={innerOpen} onOpenChange={setInnerOpen} />
-          <Button
-            size="$6"
-            circular
-            onPress={() => setInnerOpen(true)}
-          />
-        </>
-      )}
+    <Sheet.Frame padding="$4" justifyContent="center" space="$5">
+      <Link
+        href={{
+          pathname: "/(videoDetails)/[id]",
+          params: { id: 'bacon' }
+        }}>
+          View user
+        </Link>
+        <Text>Exercise History</Text>
+        <Text>Replace Exercise</Text>
     </Sheet.Frame>
   </Sheet>
   )
